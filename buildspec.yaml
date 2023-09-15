@@ -3,11 +3,11 @@ version: 0.2
 phases:
   pre_build:
     commands:
-      - echo Logging in to Amazon ECR...
-      - aws ecr get-login-password --region $AWS_DEFAULT_REGION | docker login --username AWS --password-stdin aws_account_id.dkr.ecr.region.amazonaws.com
+      - echo Logging in to Amazon ECR (REGION - $AWS_DEFAULT_REGION)...
+      - aws ecr get-login-password --region $AWS_DEFAULT_REGION | docker login --username AWS --password-stdin $AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com
   build:
     commands:
-      - echo Building application jar
+      - echo Building application jar...
       - ./gradlew clean build
       - echo Building the Docker image...
       - docker build -t valens-helloworld .
